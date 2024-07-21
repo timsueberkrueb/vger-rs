@@ -1,7 +1,7 @@
+use floem_vger::color::Color;
+use floem_vger::defs::*;
+use floem_vger::*;
 use futures::executor::block_on;
-use vger::color::Color;
-use vger::defs::*;
-use vger::*;
 extern crate rand;
 mod common;
 use common::*;
@@ -336,7 +336,7 @@ fn text_small() {
     let atlas_png_name = "text_small_atlas.png";
     save_png(
         &vger.glyph_cache.mask_atlas.atlas_texture,
-        &vger::atlas::Atlas::get_texture_desc(1, 1),
+        &floem_vger::atlas::Atlas::get_texture_desc(1, 1),
         &device,
         &queue,
         atlas_png_name,
@@ -364,7 +364,7 @@ fn text_scale() {
     let atlas_png_name = "text_scale_atlas.png";
     save_png(
         &vger.glyph_cache.mask_atlas.atlas_texture,
-        &vger::atlas::Atlas::get_texture_desc(1, 1),
+        &floem_vger::atlas::Atlas::get_texture_desc(1, 1),
         &device,
         &queue,
         atlas_png_name,
@@ -396,7 +396,7 @@ fn text_box() {
     let atlas_png_name = "text_box_atlas.png";
     save_png(
         &vger.glyph_cache.mask_atlas.atlas_texture,
-        &vger::atlas::Atlas::get_texture_desc(1, 1),
+        &floem_vger::atlas::Atlas::get_texture_desc(1, 1),
         &device,
         &queue,
         atlas_png_name,

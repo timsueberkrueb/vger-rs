@@ -241,6 +241,7 @@ impl Vger {
                 module: &shader,
                 entry_point: "vs_main",
                 buffers: &[],
+                compilation_options: Default::default(),
             },
             fragment: Some(wgpu::FragmentState {
                 module: &shader,
@@ -253,6 +254,7 @@ impl Vger {
                     }),
                     write_mask: wgpu::ColorWrites::ALL,
                 })],
+                compilation_options: Default::default(),
             }),
             primitive: wgpu::PrimitiveState {
                 cull_mode: None,
@@ -262,6 +264,7 @@ impl Vger {
             depth_stencil: None,
             multisample: wgpu::MultisampleState::default(),
             multiview: None,
+            cache: None,
         });
 
         Self {

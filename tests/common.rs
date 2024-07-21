@@ -1,6 +1,6 @@
+use floem_vger::*;
 use futures::executor::block_on;
 use std::fs::File;
-use vger::*;
 use wgpu::StoreOp;
 
 pub async fn setup() -> (wgpu::Device, wgpu::Queue) {
@@ -18,11 +18,7 @@ pub async fn setup() -> (wgpu::Device, wgpu::Queue) {
     let trace_dir = std::env::var("WGPU_TRACE");
     adapter
         .request_device(
-            &wgpu::DeviceDescriptor {
-                label: None,
-                features: wgpu::Features::default(),
-                limits: wgpu::Limits::default(),
-            },
+            &wgpu::DeviceDescriptor::default(),
             trace_dir.ok().as_ref().map(std::path::Path::new),
         )
         .await
