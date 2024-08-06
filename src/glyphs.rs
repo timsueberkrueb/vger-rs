@@ -1,13 +1,7 @@
 use crate::atlas::{Atlas, AtlasContent};
-use floem_cosmic_text::{SubpixelBin, SwashContent, SwashImage};
+use cosmic_text::{SubpixelBin, SwashContent, SwashImage};
 use rect_packer::Rect;
 use std::collections::HashMap;
-
-#[derive(Copy, Clone, Debug)]
-pub struct GlyphInfo {
-    pub rect: Option<Rect>,
-    pub metrics: fontdue::Metrics,
-}
 
 #[derive(Copy, Clone, Debug)]
 pub struct AtlasInfo {
@@ -35,7 +29,7 @@ pub struct GlyphCache {
     pub color_atlas: Atlas,
     glyph_infos: HashMap<
         (
-            floem_cosmic_text::fontdb::ID,
+            cosmic_text::fontdb::ID,
             u16,
             u32,
             (SubpixelBin, SubpixelBin),
@@ -114,7 +108,7 @@ impl GlyphCache {
 
     pub fn get_glyph_mask(
         &mut self,
-        font_id: floem_cosmic_text::fontdb::ID,
+        font_id: cosmic_text::fontdb::ID,
         glyph_id: u16,
         size: u32,
         subpx: (SubpixelBin, SubpixelBin),
