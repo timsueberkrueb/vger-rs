@@ -240,7 +240,7 @@ fn closestPointInSegment( a: vec2<f32>, b: vec2<f32>) -> vec2<f32>
 
 // From: http://research.microsoft.com/en-us/um/people/hoppe/ravg.pdf
 fn get_distance_vector(b0: vec2<f32>, b1: vec2<f32>, b2: vec2<f32>) -> vec2<f32> {
-    
+
     let a=det(b0,b2);
     let b=2.0*det(b1,b0);
     let d=2.0*det(b2,b1);
@@ -255,7 +255,7 @@ fn get_distance_vector(b0: vec2<f32>, b1: vec2<f32>, b2: vec2<f32>) -> vec2<f32>
     // (note that 2*ap+bp+dp=2*a+b+d=4*area(b0,b1,b2))
     let t=clamp((ap+bp)/(2.0*a+b+d), 0.0 ,1.0);
     return mix(mix(b0,b1,t),mix(b1,b2,t),t);
-    
+
 }
 
 fn sdBezierApprox(p: vec2<f32>, A: vec2<f32>, B: vec2<f32>, C: vec2<f32>) -> f32 {
@@ -538,22 +538,22 @@ fn vs_main(
     switch(vid) {
         case 0u: {
             q = prim.quad_bounds_min;
-            //q = vec3<f32>(80.0, 80.0, 1.0); 
+            //q = vec3<f32>(80.0, 80.0, 1.0);
             out.t = prim.tex_bounds_min;
         }
         case 1u: {
             q = vec2<f32>(prim.quad_bounds_min.x, prim.quad_bounds_max.y);
-            //q = vec3<f32>(80.0,120.0, 1.0); 
+            //q = vec3<f32>(80.0,120.0, 1.0);
             out.t = vec2<f32>(prim.tex_bounds_min.x, prim.tex_bounds_max.y);
         }
         case 2u: {
             q = vec2<f32>(prim.quad_bounds_max.x, prim.quad_bounds_min.y);
-            //q = vec3<f32>(120.0,80.0, 1.0); 
+            //q = vec3<f32>(120.0,80.0, 1.0);
             out.t = vec2<f32>(prim.tex_bounds_max.x, prim.tex_bounds_min.y);
         }
         case 3u: {
             q = prim.quad_bounds_max;
-            //q = vec3<f32>(120.0,120.0, 1.0); 
+            //q = vec3<f32>(120.0,120.0, 1.0);
             out.t = prim.tex_bounds_max;
         }
         default: { }
@@ -699,19 +699,19 @@ fn fs_main(
     var color = vec4<f32>(0.0, 0.0, 0.0, 0.0);
 
     let s = scissor_mask(scissor, in.p);
-    
+
     if(prim.prim_type == 2u && prim.cv2.x > 0.0) {
         let p = in.t;
         let blur_radius = prim.cv2.x;
         let center = 0.5*(prim.cv1 + prim.cv0);
         let half_size = 0.5*(prim.cv1 - prim.cv0);
         let point = p - center;
-        
+
         let low = point.y - half_size.y;
         let high = point.y + half_size.y;
         let start = clamp(-3.0 * blur_radius, low, high);
         let end = clamp(3.0 * blur_radius, low, high);
-        
+
         let step = (end - start) / 4.0;
         var y = start + step * 0.5;
         var value = 0.0;
@@ -719,7 +719,7 @@ fn fs_main(
             value += roundedBoxShadowX(point.x, point.y - y, blur_radius, prim.radius, half_size) * gaussian(y, blur_radius) * step;
             y += step;
         }
-        
+
         return s * vec4<f32>(paint.inner_color.rgb, value * paint.inner_color.a);
     }
 
@@ -740,7 +740,7 @@ fn fs_main(
 
         return s * color;
     }
-    
+
     if(prim.prim_type == 9u) { // vgerColorGlyph
 
         let c = paint.inner_color;
@@ -755,7 +755,7 @@ fn fs_main(
 
         return s * color;
     }
-    
+
     if(prim.prim_type == 11u) { // overrideColorSvg
 
         let c = paint.inner_color;
