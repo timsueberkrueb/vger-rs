@@ -503,7 +503,7 @@ var<storage> xforms: XForms;
 
 struct VertexOutput {
     @builtin(position) position: vec4<f32>,
-    @location(0) prim_index: u32,
+    @location(0) @interpolate(flat) prim_index: u32,
 
     /// Texture space point.
     @location(1) t: vec2<f32>,
